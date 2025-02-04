@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:newsapp/app/core/const/app_style.dart';
 import 'package:newsapp/app/core/const/color.dart';
 import 'package:newsapp/app/core/custom/image/custom_box_image_assets.dart';
+import 'package:newsapp/app/core/custom/image/custom_box_image_network.dart';
+import 'package:newsapp/app/modules/home/controllers/home_controller.dart';
 
 class TopNewsWidget extends StatelessWidget {
   const TopNewsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
+
     return Padding(
       padding: EdgeInsets.only(
         left: 24,
@@ -63,66 +68,93 @@ class TopNewsWidget extends StatelessWidget {
                     )
                   ],
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: Row(
-                        children: [
-                          CustomBoxImageAssets(
-                            image: 'assets/images/top_news_image.png',
-                            width: 52,
-                            height: 52,
-                          ),
-                          SizedBox(
-                            width: 32,
-                          ),
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: grayColor.withOpacity(0.2),
-                                  ),
-                                ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                Obx(
+                  () => controller.isLoading.value
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: controller.newsList.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
                                 children: [
-                                  Text(
-                                    'Kwarcab Kabupaten Bogor Minta Anggota Pramuka Ikut Vaksinasi',
-                                    style: latoSemiBold.copyWith(
-                                      fontSize: 13,
-                                      color: blackColor.withOpacity(0.8),
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                                  SizedBox(
+                                    width: 52,
+                                    height: 52,
+                                    child:
+                                        controller.newsList[index].imageUrl !=
+                                                null
+                                            ? CustomBoxImageNetwork(
+                                                image: controller
+                                                        .newsList[index]
+                                                        .imageUrl ??
+                                                    '',
+                                                fit: BoxFit.cover,
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                              )
+                                            : CustomBoxImageAssets(
+                                                image:
+                                                    'assets/images/placeholder.png',
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                              ),
                                   ),
                                   SizedBox(
-                                    height: 4,
+                                    width: 32,
                                   ),
-                                  Text(
-                                    '12 April 2021',
-                                    style: latoRegular.copyWith(
-                                      fontSize: 12,
-                                      color: grayColor,
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: grayColor.withOpacity(0.2),
+                                          ),
+                                        ),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            controller.newsList[index].title ??
+                                                '',
+                                            style: latoSemiBold.copyWith(
+                                              fontSize: 13,
+                                              color:
+                                                  blackColor.withOpacity(0.8),
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          SizedBox(
+                                            height: 4,
+                                          ),
+                                          Text(
+                                            controller.newsList[index].date ??
+                                                '',
+                                            style: latoRegular.copyWith(
+                                              fontSize: 12,
+                                              color: grayColor,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 12,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 12,
-                                  ),
+                                  )
                                 ],
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                )
+                            );
+                          },
+                        ),
+                ),
               ],
             ),
           )

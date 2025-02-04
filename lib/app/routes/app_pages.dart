@@ -1,12 +1,17 @@
 import 'package:get/get.dart';
-import 'package:newsapp/app/modules/about/views/about_view.dart';
-import 'package:newsapp/app/modules/navigator_bar/bindings/navigation_bar_binding.dart';
-import 'package:newsapp/app/modules/navigator_bar/views/navigator_bar_view.dart';
+
+import '../modules/about/views/about_view.dart';
 import '../modules/getstarted/views/get_started_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/navigator_bar/bindings/navigation_bar_binding.dart';
+import '../modules/navigator_bar/views/navigator_bar_view.dart';
+import '../modules/news/bindings/news_binding.dart';
+import '../modules/news/views/news_view.dart';
+import '../modules/news_category/bindings/news_category_binding.dart';
+import '../modules/news_category/views/news_category_view.dart';
 import '../modules/news_detail/bindings/news_detail_binding.dart';
 import '../modules/news_detail/views/news_detail_view.dart';
 import '../modules/register/bindings/register_binding.dart';
@@ -17,7 +22,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.REGISTER;
+  static const INITIAL = Routes.NAVIGATION_BAR;
 
   static final routes = [
     GetPage(
@@ -52,6 +57,16 @@ class AppPages {
       name: _Paths.NAVIGATION_BAR,
       page: () => const NavigatorBarView(),
       binding: NavigationBarBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEWS_CATEGORY,
+      page: () => const NewsCategoryView(),
+      binding: NewsCategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEWS,
+      page: () => const NewsView(),
+      binding: NewsBinding(),
     ),
   ];
 }

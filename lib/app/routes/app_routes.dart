@@ -10,6 +10,8 @@ abstract class Routes {
   static const NEWS_DETAIL = _Paths.NEWS_DETAIL;
   static const ABOUT = _Paths.ABOUT;
   static const NAVIGATION_BAR = _Paths.NAVIGATION_BAR;
+  static const NEWS_CATEGORY = _Paths.NEWS_CATEGORY;
+  static const NEWS = _Paths.NEWS;
 }
 
 abstract class _Paths {
@@ -21,4 +23,6 @@ abstract class _Paths {
   static const NEWS_DETAIL = '/news-detail';
   static const ABOUT = '/about';
   static const NAVIGATION_BAR = '/navigation-bar';
+  static const NEWS_CATEGORY = '/news-category/:category';
+  static const NEWS = '/news';
 }

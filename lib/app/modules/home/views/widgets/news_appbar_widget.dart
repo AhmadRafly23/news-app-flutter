@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newsapp/app/core/const/app_style.dart';
 import 'package:newsapp/app/core/const/color.dart';
-// import 'package:newsapp/app/modules/login/controllers/login_controller.dart';
-import 'package:newsapp/app/service/auth_service.dart';
+import 'package:newsapp/app/data/services/auth_service.dart';
 
 class NewsAppbarWidget extends StatelessWidget implements PreferredSizeWidget {
   const NewsAppbarWidget({super.key});
