@@ -11,6 +11,7 @@ class AboutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24),

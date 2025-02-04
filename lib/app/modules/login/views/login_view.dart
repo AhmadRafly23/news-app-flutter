@@ -45,16 +45,18 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
                 SizedBox(
-                  height: 90,
+                  height: 30,
                 ),
                 CustomTextFormField(
                   label: 'Email',
                   borderRadius: BorderRadius.all(Radius.circular(10)),
+                  controller: controller.emailController,
                 ),
                 CustomTextFormField(
                   label: 'Password',
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   padding: EdgeInsets.only(bottom: 10),
+                  controller: controller.passwordController,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,17 +100,39 @@ class LoginView extends GetView<LoginController> {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 60,
                 ),
-                CustomButton(
-                  text: 'Masuk',
-                  onPressed: () {},
-                  backgroundColor: lightBlueColor,
-                  style:
-                      poppinsMedium.copyWith(color: whiteColor, fontSize: 15),
-                  height: 52,
-                  borderRadius: 100,
-                  margin: EdgeInsets.only(bottom: 20),
+                Obx(
+                  () => controller.isLoading.value
+                      ? Center(
+                          child: SizedBox(
+                            height: 52,
+                            width: 52,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(
+                                lightBlueColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : CustomButton(
+                          text: 'Masuk',
+                          onPressed: () {
+                            controller
+                                .signInWithEmailAndPassword()
+                                .then((user) {
+                              if (user != null) {
+                                Get.offAllNamed('/navigation-bar');
+                              }
+                            });
+                          },
+                          backgroundColor: lightBlueColor,
+                          style: poppinsMedium.copyWith(
+                              color: whiteColor, fontSize: 15),
+                          height: 52,
+                          borderRadius: 100,
+                          margin: EdgeInsets.only(bottom: 20),
+                        ),
                 ),
               ],
             ),

@@ -1,23 +1,59 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:newsapp/app/core/const/app_style.dart';
+import 'package:newsapp/app/core/const/color.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  final _auth = FirebaseAuth.instance;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  RxBool isLoading = false.obs;
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<User?> signInWithEmailAndPassword() async {
+    try {
+      isLoading.value = true;
+      final credential = await _auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      if (credential.user != null) {
+        isLoading.value = false;
+        Get.snackbar(
+          "Berhasil",
+          "Login berhasil",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP,
+          duration: Duration(seconds: 3),
+          messageText: Text(
+            "Login berhasil",
+            style: latoRegular.copyWith(color: whiteColor),
+          ),
+        );
+        return credential.user;
+      }
+    } on FirebaseAuthException {
+      isLoading.value = false;
+      Get.snackbar(
+        "Gagal",
+        "Email atau password salah",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        duration: Duration(seconds: 3),
+        messageText: Text(
+          "Email atau password salah",
+          style: latoRegular.copyWith(color: whiteColor),
+        ),
+      );
+    }
+    return null;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> logout() async {
+    await _auth.signOut();
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

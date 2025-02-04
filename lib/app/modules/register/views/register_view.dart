@@ -50,11 +50,13 @@ class RegisterView extends GetView<RegisterController> {
                 CustomTextFormField(
                   label: 'Email',
                   borderRadius: BorderRadius.all(Radius.circular(10)),
+                  controller: controller.emailController,
                 ),
                 CustomTextFormField(
                   label: 'Password',
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   padding: EdgeInsets.only(bottom: 10),
+                  controller: controller.passwordController,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -86,15 +88,36 @@ class RegisterView extends GetView<RegisterController> {
                 SizedBox(
                   height: 60,
                 ),
-                CustomButton(
-                  text: 'Daftar',
-                  onPressed: () {},
-                  backgroundColor: darkBlueColor,
-                  style:
-                      poppinsMedium.copyWith(color: whiteColor, fontSize: 15),
-                  height: 52,
-                  borderRadius: 100,
-                  // margin: EdgeInsets.only(bottom: 20),
+                Obx(
+                  () => controller.isLoading.value
+                      ? Center(
+                          child: SizedBox(
+                            height: 52,
+                            width: 52,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(
+                                darkBlueColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : CustomButton(
+                          text: 'Daftar',
+                          onPressed: () {
+                            controller
+                                .createUserWithEmailAndPassword()
+                                .then((user) {
+                              if (user != null) {
+                                Get.toNamed('/login');
+                              }
+                            });
+                          },
+                          backgroundColor: darkBlueColor,
+                          style: poppinsMedium.copyWith(
+                              color: whiteColor, fontSize: 15),
+                          height: 52,
+                          borderRadius: 100,
+                        ),
                 ),
               ],
             ),

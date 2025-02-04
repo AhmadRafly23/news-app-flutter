@@ -11,6 +11,7 @@ class NavigatorBarView extends GetView<NavigationBarController> {
       body: Obx(() => controller.pages[controller.selectedIndex.value]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
+          backgroundColor: Color(0xFFF1F1F1),
           currentIndex: controller.selectedIndex.value,
           onTap: controller.changePage,
           selectedItemColor: Colors.deepOrangeAccent,

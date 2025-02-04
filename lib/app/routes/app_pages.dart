@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:newsapp/app/modules/about/views/about_view.dart';
 import 'package:newsapp/app/modules/navigator_bar/bindings/navigation_bar_binding.dart';
 import 'package:newsapp/app/modules/navigator_bar/views/navigator_bar_view.dart';
-
 import '../modules/getstarted/views/get_started_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -18,7 +17,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.NAVIGATION_BAR;
+  static const INITIAL = Routes.REGISTER;
 
   static final routes = [
     GetPage(
