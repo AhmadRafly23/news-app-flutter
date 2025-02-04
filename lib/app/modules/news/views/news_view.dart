@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 import 'package:newsapp/app/core/const/app_style.dart';
 import 'package:newsapp/app/core/const/color.dart';
-import 'package:newsapp/app/modules/news/controllers/news_controller.dart';
-import 'package:newsapp/app/modules/news_detail/views/widgets/news_detail_widget.dart';
+import 'package:newsapp/app/modules/news/views/widgets/news_widget.dart';
 import 'package:newsapp/app/modules/news_detail/views/widgets/news_suggestion_widget.dart';
 
-class NewsView extends GetView<NewsController> {
+class NewsView extends StatelessWidget {
   const NewsView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class NewsView extends GetView<NewsController> {
       backgroundColor: whiteColor,
       body: ListView(
         children: [
-          NewsDetailWidget(),
+          NewsWidget(),
           NewsSuggestionWidget(),
         ],
       ),

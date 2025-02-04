@@ -8,7 +8,6 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/navigator_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigator_bar/views/navigator_bar_view.dart';
-import '../modules/news/bindings/news_binding.dart';
 import '../modules/news/views/news_view.dart';
 import '../modules/news_category/bindings/news_category_binding.dart';
 import '../modules/news_category/views/news_category_view.dart';
@@ -66,7 +65,7 @@ class AppPages {
     GetPage(
       name: _Paths.NEWS,
       page: () => const NewsView(),
-      binding: NewsBinding(),
+      // binding: NewsBinding(),
     ),
   ];
 }

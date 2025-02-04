@@ -14,7 +14,7 @@ class NewsModel {
   });
 
   NewsModel.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
+    title = json['title'] ?? '';
     link = json['link'];
     description = json['description'];
     date = json['pubDate'];

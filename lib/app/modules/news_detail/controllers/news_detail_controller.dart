@@ -30,7 +30,6 @@ class NewsDetailController extends RxController {
       newsDetail.value = NewsModel();
       return;
     }
-    print(title.value.substring(0, 15));
 
     final String url = dotenv.env['API_URL'] ?? '';
 

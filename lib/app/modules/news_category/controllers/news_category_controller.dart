@@ -9,11 +9,9 @@ class NewsCategoryController extends RxController {
   var newsList = <NewsModel>[].obs;
   RxBool isLoading = false.obs;
 
-  // Menjalankan fungsi fetchNews secara otomatis saat category berubah
   @override
   void onInit() {
     super.onInit();
-    // Set up reaction: setiap kali category berubah, jalankan fetchNews
     ever(category, (_) => fetchNews());
   }
 
